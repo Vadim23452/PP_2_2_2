@@ -1,6 +1,7 @@
 package web.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
@@ -22,10 +23,12 @@ public class CarServiceImpl implements CarService {
 
   @Override
   public List<Car> getCarsByCount(int count) {
-    if (count == 0) {
-      return carList;
-    } else {
-      return carList.stream().limit(count).collect(Collectors.toList());
-    }
+
+     if (count < 0) {
+       return Collections.emptyList();
+     } else {
+       return carList.stream().limit(count).collect(Collectors.toList());
+     }
+
   }
 }
